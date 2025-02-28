@@ -19,29 +19,66 @@
     }
 
     // Regular
+    console.log('hello');
 
     // Interpolated
+    console.log('Hello I am a %s string!', 'S T R I N G');
 
     // Styled
+    console.log('%c I am some great text', 'font-size: 42px; background:red; text-shadow: 10px 10px 0 blue');
 
     // warning!
+    console.warn('WARNING! %s', 'this is a warning');
 
     // Error :|
+    console.error('ERROR! %s', 'this is a error');
 
     // Info
+    console.info('INFO! %s', 'this is a info');
 
     // Testing
+    console.assert(2+2 === 4, 'Testing for correctness');
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'That is wrong!');
 
     // clearing
+    console.clear();
 
     // Viewing DOM Elements
+    console.log(p);
+    console.dir(p);
+    console.clear();
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}, ${dog.age}`)
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    })
 
     // counting
+    console.count('makeGreen');
+    console.count('makeGreen');
+    console.count('makeGreen');
+    console.count('makeRed');
+    console.count('makeRed');
+    console.count('makeGreen');
+    console.count('makeRed');
 
     // timing
+    console.time('fetch data');
+    fetch('https://api.github.com/users/bai-rongzhuo')
+      .then(data => data.json())
+      .then(data => {
+        console.log(data);
+        console.timeEnd('fetch data');
+      });
 
+
+    // table
+    console.table(dogs);
   </script>
 </body>
 </html>
