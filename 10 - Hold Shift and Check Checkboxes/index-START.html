@@ -97,6 +97,51 @@
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('input');
+
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleUpdate));
+
+  function handleUpdate(e) {
+    if (isShiftDown) {
+      let i = 0;
+      for (i=0; i<checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          break;
+        }
+      }
+      for (; checkboxes[i] != this; i++) {
+        checkboxes[i].checked = true;
+      }
+
+      let j = checkboxes.length-1;
+      for (; j>=0; j--) {
+        if (checkboxes[j].checked) {
+          break;
+        }
+      }
+      for (; checkboxes[j] != this; j--) {
+        checkboxes[j].checked = true;
+      }
+    }
+  }
+
+  const checklist = document.querySelector('.inbox');
+  var isShiftDown = false;
+  document.addEventListener('keydown', e => {
+    // console.log(e);
+    if (e.key == "Shift") {
+      isShiftDown = true;
+    }
+  });
+  document.addEventListener('keyup', e => {
+    // console.log(e);
+    if (e.key == "Shift") {
+      isShiftDown = false;
+    }
+  });
+  
+
+
 </script>
 </body>
 </html>
