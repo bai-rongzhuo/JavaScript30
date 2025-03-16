@@ -43,7 +43,36 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
 
+
+  function logText(e) {
+    // when listening to click on multiple nested elements and you click innermost element you will get clicks on every element up the stack
+    console.log(this.classList.value);
+    e.stopPropagation(); // stops the event from propagating up or down
+    // if used with capture: true then it only triggers event on highest item
+  }
+
+  /*
+    How this works in JS:
+    In modern browsers, it will first do a "capture", so when you click the element it will ripple down
+    So when you click the "three" div the browser will say "You clicked on body, one, two, and three."
+    So event triggers go from top down, they are recorded in their respective elements, then it starts to bubble up
+    The triggered events then starts to fire from the lowest element and goes up the stack
+    So browser will say "Firing off events on three, two, one, body."
+  */
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: true, // If true, the event triggers on capture down instead of bubble up.  This is defaulted to false.
+    once: true // this fires exactly once before removing the listener from the object
+  }));
+
+  button.addEventListener('click', () => {
+    console.log('Click!!!');
+  }, {
+    once: true
+  });
 </script>
 </body>
 </html>
