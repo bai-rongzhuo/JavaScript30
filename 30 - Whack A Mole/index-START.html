@@ -57,31 +57,18 @@
   function holeDown(hole, time) {
    return new Promise((resolve) => {
     setTimeout(() => {
-      hole.classList.remove('up');
+      resolve(hole.classList.remove('up'));
       }, time);
     });
-
   }
   
-  // async function peep() {
-  //   while(!timeUp) {
-  //     const time = randomTime(200, 1000);
-  //     const hole = randomHole(holes);
-  //     hole.classList.add('up');
-  //     await holeDown(hole, time);
-  //     console.log(timeUp);
-  //   }
-  // }
-
-  // todo: implement iterative variant
-  function peep() {
-    const time = randomTime(200, 1000);
-    const hole = randomHole(holes);
-    hole.classList.add('up');
-    setTimeout(() => {
-      hole.classList.remove('up');
-      if (!timeUp) peep();
-    }, time);
+  async function peep() {
+    while(!timeUp) {
+      const time = randomTime(200, 1000);
+      const hole = randomHole(holes);
+      hole.classList.add('up');
+      await holeDown(hole, time);
+    }
   }
 
   function startGame() {
